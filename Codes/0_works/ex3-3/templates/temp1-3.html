@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  教育部简报 - 教育部网站
+{% endblock title %}
+
+{% block newscontent %}
+  <div class="briefing-content">
+    <h2>教育部简报</h2>
+    
+    <div class="briefing-filter">
+      <select class="year-select">
+        <option>2023年</option>
+        <option>2022年</option>
+        <option>2021年</option>
+      </select>
+      <select class="type-select">
+        <option>全部类型</option>
+        <option>工作动态</option>
+        <option>政策解读</option>
+        <option>数据统计</option>
+      </select>
+    </div>
+    
+    <div class="briefing-list">
+      {% for i in range(1, 6) %}
+      <div class="briefing-item">
+        <h3>第{{ i }}期：教育部近期重点工作进展情况通报</h3>
+        <p class="briefing-summary">本期简报主要介绍教育部在高等教育改革、基础教育发展、职业教育创新等方面的最新工作进展...</p>
+        <div class="briefing-footer">
+          <span class="issue-date">2023年12月{{ 10+i }}日</span>
+          <a href="#" class="download-btn">下载PDF</a>
+          <a href="#" class="read-online">在线阅读</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    
+    <div class="pagination">
+      <a href="#" class="page-btn">上一页</a>
+      <a href="#" class="page-btn active">1</a>
+      <a href="#" class="page-btn">2</a>
+      <a href="#" class="page-btn">3</a>
+      <a href="#" class="page-btn">下一页</a>
+    </div>
+  </div>
+{% endblock newscontent %}

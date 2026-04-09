@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="中华人民共和国教育部官方网站">
+    <title>
+        {% block title %}教育部网站{% endblock title %}
+    </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base2.css') }}">
+    {% block head %}{% endblock head %}
+</head>
+
+<body>
+    <div class="container">
+        <!-- 导航 -->
+        <div class="nav">
+            <ul>
+                <li class="{{ 'active' if active_nav == 'home' else '' }}">
+                    <a href="/">首页</a>
+                </li>
+                <li><a href="#">机构</a></li>
+                <li><a href="#">新闻</a></li>
+                <li><a href="#">公开</a></li>
+                <li><a href="#">服务</a></li>
+                <li><a href="#">互动</a></li>
+            </ul>
+        </div>
+        
+        <!-- 轮播 -->
+        <div class="banner">
+            <img src="{{ url_for('static', filename='img/banner.jpg') }}" alt="教育部网站 banner">
+        </div>
+        
+        <!-- 新闻 -->
+        <div class="news">
+            <div id="title">
+                <ul class="clear">
+                    <li class="{{ 'active' if active_tab == 'temp1' else '' }}">
+                        <a href="/temp1">最新文件</a>
+                    </li>
+                    <li class="{{ 'active' if active_tab == 'temp2' else '' }}">
+                        <a href="/temp2">公告公示</a>
+                    </li>
+                    <li class="{{ 'active' if active_tab == 'temp3' else '' }}">
+                        <a href="/temp3">教育部简报</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- 新闻内容 -->
+            <div class="newslist clear">
+                {% block newscontent %}{% endblock newscontent %}
+            </div>
+            
+            <!-- 页脚 -->
+            <div class="footer clear">
+                <p>
+                    <ul class="clear">
+                        <li><img src="{{ url_for('static', filename='img/f1.jpg') }}" alt="网站声明"><br>网站声明</li>
+                        <li><img src="{{ url_for('static', filename='img/f2.jpg') }}" alt="网站地图"><br>网站地图</li>
+                        <li><img src="{{ url_for('static', filename='img/f3.jpg') }}" alt="联系我们"><br>联系我们</li>
+                    </ul>
+                </p>
+                <p>
+                    版权所有：中华人民共和国教育部 中文域名：教育部政务<br>
+                    网站标识码：bm05000001 京ICP备10028400号-1
+                </p>
+                <p class="footer-info">
+                    当前时间：{{ current_date }} | 访问统计：1234567 次
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 可添加公共脚本 -->
+    <script>
+        // 简单的交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 为列表项添加点击效果
+            document.querySelectorAll('.list').forEach(item => {
+                item.addEventListener('click', function() {
+                    this.classList.toggle('selected');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

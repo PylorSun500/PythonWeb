@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        {% endblock title %}
+    </title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/base2.css')}}">
+</head>
+
+<body>
+    <div class="container">
+        <!-- 导航 -->
+        <div class="nav">
+            <ul>
+                <li class="active">首页</li>
+                <li>机构</li>
+                <li>新闻</li>
+                <li>公开</li>
+                <li>服务</li>
+                <li>互动</li>
+            </ul>
+        </div>
+        <!-- 轮播 -->
+        <div class="banner">
+            <img src="static/img/banner.jpg" >
+        </div>
+        <!-- 新闻 -->
+        <div class="news">
+            <div id="title">
+                <ul class="clear">
+                    <li> <a href="/temp1">最新文件</a></li>
+                    <li> <a href="/temp2">公告公示</a></li>
+                    <li> <a href="/temp3">教育部简报</a></li>
+
+                </ul>
+            </div>
+           <!-- 新闻内容-->
+          <div class="newslist  clear">
+            {% block newscontent %}
+
+            {% endblock newscontent %}
+        </div>
+        <div class="footer clear">
+            <p>
+            <ul class="clear">
+                <li> <img src="/static/img/f1.jpg"><br>网站声明</li>
+                <li><img src="/static/img/f2.jpg"> <br>网站地图</li>
+                <li><img src="/static/img/f3.jpg" ><br>联系我们</li>
+            </ul>
+            </p>
+            <p>
+                版权所有：中华人民共和国教育部 中文域名：教育部政务
+            </p>
+
+        </div>
+    </div>
+ </div>
+</body>
+
+</html>

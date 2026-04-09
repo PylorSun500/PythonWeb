@@ -1,0 +1,15 @@
+<!-- 本文件旨在展示 Flask 的控制语法 -->
+<!-- if-elif-else-endif 分支结构 -->
+<body>
+    {% if score < 60 %}
+        <h1>你的成绩是 {{ score }} 分，不及格！</h1>
+    {% elif score >= 60 and score < 80 %}
+        <h1>你的成绩是 {{ score }} 分，及格！</h1>
+    {% elif score >= 80 and score < 90 %}
+        <h1>你的成绩是 {{ score }} 分，良好！</h1>
+    {% elif score > 100 or score < 0 %}
+        <h1>你那成绩算数吗你就写？</h1>
+    {% else %}
+        <h1>你的成绩是 {{ score }} 分，优秀！</h1>
+    {% endif %}
+</body>

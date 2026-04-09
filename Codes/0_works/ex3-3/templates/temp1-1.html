@@ -1,0 +1,58 @@
+
+
+{% extends 'base.html' %}
+
+{% block title %}
+  最新文件 - 教育部网站
+{% endblock title %}
+
+<!-- 可以在head区块添加页面特定样式或脚本 -->
+{% block head %}
+  <style>
+    /* 页面特定样式 */
+    .highlight {
+      color: #ff6600;
+      font-weight: bold;
+    }
+  </style>
+{% endblock head %}
+
+{% block newscontent %}
+  <div class="content-header">
+    <h2>最新文件</h2>
+    <p class="update-time">最后更新: {{ current_date }}</p>
+  </div>
+  
+  <ul class="document-list">
+    <li class="list">
+      <a href="#" class="document-title">关于加快新农科建设推进高等农林教育创新发展的指导意见</a>
+      <span class="date">12-07</span>
+      <span class="tag highlight">新发布</span>
+    </li>
+    <li class="list">
+      <a href="#" class="document-title">关于印发《国家语言文字推广基地管理办法》的通知</a>
+      <span class="date">12-05</span>
+      <span class="tag">重要</span>
+    </li>
+    <li class="list">
+      <a href="#" class="document-title">关于印发《高等学校公共艺术课程指导纲要》的通知</a>
+      <span class="date">12-01</span>
+    </li>
+    <!-- 添加更多条目使页面更充实 -->
+    <li class="list">
+      <a href="#" class="document-title">关于进一步加强高校毕业生就业创业工作的通知</a>
+      <span class="date">11-28</span>
+    </li>
+    <li class="list">
+      <a href="#" class="document-title">关于开展2023年度国家级教学成果奖评审工作的通知</a>
+      <span class="date">11-25</span>
+      <span class="tag">截止提醒</span>
+    </li>
+  </ul>
+  
+  <!-- 添加分页或更多内容 -->
+  <div class="more-actions">
+    <a href="#" class="btn-more">查看更多文件</a>
+    <a href="#" class="btn-download">下载全部文件 (PDF)</a>
+  </div>
+{% endblock newscontent%}

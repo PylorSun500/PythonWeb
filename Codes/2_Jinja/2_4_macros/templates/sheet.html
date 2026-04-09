@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{# 定义一个描述input控件类型的宏 #}
+{% macro input(name,type='text',value='') %}
+<input type="{{ type }}" name="{{ name }}" value="{{ value }}">
+{% endmacro %}
+
+<p>用户名:{{ input("username") }}</p >
+<p>密码:{{ input("pwd",type="password") }}</p >
+<p>{{ input("login",type="submit",value="登录") }}
+{{ input("clear",type="reset",value="清空") }}</p >
+
+<h4>您目前对哪些技术感兴趣？（多选）</h4>
+<p>{{ input('Python', type='checkbox') }} Python</p >
+<p>{{ input('Java',type='checkbox') }} Java</p >
+<p>{{ input('data',type='checkbox') }} 大数据</p >
+<p>{{ input('JS',type='checkbox') }} JavaScript</p >
+<p>{{ input('commit', type="button", value="提交") }}</p >
+
+<h4>您的班级为？（单选）</h4>
+{# 单选框必须name相同，才能实现互斥选择 #}
+<p>{{ input('class', type='radio', value='1班') }} 计算机1班</p >
+<p>{{ input('class', type='radio', value='2班') }} 计算机2班</p >
+<p>{{ input('class', type='radio', value='3班') }} 计算机3班</p >
+<p>{{ input('submit_class', type="submit", value="提交") }}</p >
+</body>
+</html>
