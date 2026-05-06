@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>江西水文化数字展馆 | 智绘水韵·传承千年</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { width: 100%; height: 100%; overflow: hidden; }
+
+        /* 门面背景：全屏展示效果图 */
+        .hero-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('{{ url_for("static", filename="images/exhibition-front.jpeg") }}') no-repeat center center;
+            background-size: cover;
+            z-index: 1;
+        }
+
+        /* 左上角半透明遮罩增强文字可读性（可选） */
+        .hero-bg::after {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.25);
+            z-index: 2;
+        }
+
+        /* 内容层，置于背景之上 */
+        .overlay {
+            position: relative; z-index: 10;
+            width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* 顶部导航 */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 50px;
+            background: rgba(9, 23, 41, 0.70);
+            backdrop-filter: blur(8px);
+        }
+        nav .logo {
+            font-size: 24px; font-weight: bold;
+            color: #f9e076; letter-spacing: 2px;
+        }
+        nav ul {
+            display: flex; gap: 30px; list-style: none;
+        }
+        nav ul li a {
+            color: #e0e1dd; text-decoration: none;
+            font-size: 16px; letter-spacing: 2px;
+            transition: color 0.3s, border-bottom 0.3s;
+            padding-bottom: 4px;
+            border-bottom: 2px solid transparent;
+        }
+        nav ul li a:hover {
+            color: #d4af37;
+            border-bottom-color: #d4af37;
+        }
+
+        /* 中央引导区 */
+        .hero-text {
+            text-align: center;
+            margin-top: 15vh;
+        }
+        .hero-text h1 {
+            font-size: 56px;
+            background: linear-gradient(180deg, #f9e076 0%, #b68b40 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 6px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+        .hero-text .sub {
+            font-size: 22px; color: #a8dadc;
+            letter-spacing: 4px;
+            margin-bottom: 40px;
+        }
+        .enter-btn {
+            display: inline-block;
+            padding: 14px 48px;
+            /* 用 rgba 实现金色渐变 + 约 15% 透明度 */
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.85), rgba(249, 224, 118, 0.85));
+            color: #0d1b2a;
+            font-size: 20px; font-weight: bold;
+            border-radius: 40px;
+            letter-spacing: 3px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.25); /* 阴影同步调淡 */
+        }
+        .enter-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.45);
+        }
+
+        /* 底部版权 */
+        footer {
+            text-align: center; padding: 20px;
+            color: rgba(255,255,255,0.5); font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 门面背景层 -->
+    <div class="hero-bg"></div>
+
+    <!-- 内容叠加层 -->
+    <div class="overlay">
+        <nav>
+            <div class="logo">🌊 江西水文化数字展馆</div>
+            <ul>
+                <li><a href="/">首页</a></li>
+                <li><a href="#">文化脉络</a></li>
+                <li><a href="#">水利智慧</a></li>
+                <li><a href="/water-list">数字展馆</a></li>
+                <li><a href="#">关于我们</a></li>
+            </ul>
+        </nav>
+
+        <div class="hero-text">
+            <h1>智绘水韵 · 传承千年</h1>
+            <p class="sub">WATER CULTURE DIGITAL MUSEUM OF JIANGXI</p>
+            <a href="/water-list" class="enter-btn">进入数字展馆</a>
+        </div>
+
+        <footer>
+            虚实融通 智绘传承 | 红井精神 · 人水和谐
+        </footer>
+    </div>
+</body>
+</html>

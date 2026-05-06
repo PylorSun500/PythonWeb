@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>江西水文化数字展馆 | 虚实融通 智绘传承</title>
+    <style>
+        /* ========== 全局展馆风格 ========== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: radial-gradient(ellipse at bottom, #0d1b2a 0%, #000000 100%);
+            color: #e0e1dd;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        a { text-decoration: none; color: inherit; }
+
+        /* 动态水波纹背景 */
+        .water-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(
+                transparent, transparent 40px,
+                rgba(27, 93, 155, 0.03) 40px, rgba(27, 93, 155, 0.03) 41px
+            );
+            background-size: 100% 80px;
+            animation: waterFlow 3s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        @keyframes waterFlow {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 80px; }
+        }
+
+        /* 导航栏 */
+        nav {
+            position: relative; z-index: 10;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 50px;
+            background: rgba(9, 23, 41, 0.80);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        nav .logo {
+            font-size: 26px; font-weight: bold;
+            background: linear-gradient(135deg, #d4af37, #f9e076);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+        nav ul { display: flex; gap: 30px; list-style: none; }
+        nav ul li {
+            font-size: 16px; letter-spacing: 2px; cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: 0.3s; padding-bottom: 4px;
+        }
+        nav ul li:hover { border-bottom-color: #d4af37; color: #d4af37; }
+
+        /* 主内容区域 */
+        .main-content {
+            position: relative; z-index: 5;
+            max-width: 1200px; margin: 0 auto; padding: 40px 20px;
+        }
+        .hero {
+            text-align: center; margin-bottom: 50px;
+        }
+        .hero h1 {
+            font-size: 48px;
+            background: linear-gradient(180deg, #f9e076, #b68b40);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .hero .subtitle {
+            font-size: 18px; color: #a8dadc; letter-spacing: 4px;
+        }
+
+        /* 水系卡片网格 */
+        /* 水系卡片网格 —— 改为 Flex 居中布局 */
+        .water-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;   /* 卡片始终居中 */
+            gap: 30px;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+        .water-card {
+            width: 320px;               /* 固定宽度保持统一 */
+            max-width: 100%;            /* 小屏幕自适应 */
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            flex-shrink: 0;
+        }
+        .water-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(212, 175, 55, 0.1);
+        }
+        .water-card img {
+            width: 100%; height: 200px; object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .card-info { padding: 20px; }
+        .card-info h3 {
+            font-size: 24px; color: #f9e076; margin-bottom: 8px;
+        }
+        .water-level {
+            display: inline-block;
+            background: rgba(27, 93, 155, 0.4);
+            padding: 4px 12px; border-radius: 20px;
+            font-size: 14px; color: #a8dadc; margin-bottom: 12px;
+        }
+        .intro {
+            font-size: 15px; line-height: 1.6; color: #cbd5e1;
+        }
+
+        /* 空数据温情提示 */
+        .empty-state {
+            text-align: center; color: #d4af37; font-style: italic;
+            padding: 60px 20px; font-size: 18px;
+        }
+
+        /* 页脚 */
+        footer {
+            text-align: center; padding: 30px; z-index: 10; position: relative;
+            color: rgba(255,255,255,0.4); font-size: 14px;
+            border-top: 1px solid rgba(255,255,255,0.05); margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="water-bg"></div>
+
+    <!-- 导航栏（模拟效果图“首页、文化脉络、水利智慧、数字展馆、关于我们”） -->
+    <nav>
+        <div class="logo">🌊 江西水文化数字展馆</div>
+        <ul>
+            <li><a href="/">首页</a></li>
+            <li>文化脉络</li>
+            <li>水利智慧</li>
+            <li><a href="/water-list">数字展馆</a></li>
+            <li>关于我们</li>
+        </ul>
+    </nav>
+
+    <!-- Jinja2 子模板插入点 -->
+    {% block content %}{% endblock %}
+
+    <footer>
+        <p>数据之水，传承千年文脉 · 虚实融通 智绘传承</p>
+    </footer>
+</body>
+</html>

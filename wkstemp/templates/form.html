@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>通用表单</title>
+</head>
+<body>
+    <h2>Flask处理通用表单</h2>
+
+    <form method="post">
+        <p>
+            姓名：
+            <input type="text" name="username">
+        </p>
+        <p>
+            爱好：
+            <input type="text" name="hobby">
+        </p>
+        <p>
+            <input type="submit" value="提交">
+        </p>
+    </form>
+
+    <p>{{ message }}</p>
+
+    <p><a href="/">返回首页</a></p>
+</body>
+</html>

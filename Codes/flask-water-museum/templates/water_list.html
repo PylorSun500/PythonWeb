@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="main-content">
+    <div class="hero">
+        <h1>智绘水韵·传承千年</h1>
+        <p class="subtitle">江西五大水系 · 实时数字展馆</p>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- 【Jinja2 渲染重点】 循环遍历后端传递的 water_systems -->
+    <!-- 变量名必须与 app.py 中 render_template 的左参数完全一致 -->
+    <!-- ============================================ -->
+    {% if water_systems %}
+    <div class="water-grid">
+        {% for system in water_systems %}
+        <!-- 单个水系卡片 -->
+        <div class="water-card">
+            <!-- 图片路径通过 url_for 动态生成，确保前后端路径匹配-->
+            <img src="{{ url_for('static', filename=system.image_path) }}">
+            <div class="card-info">
+                <!-- 【变量绑定】 system.name 来源于模型字段，大小写严格一致 -->
+                <h3>{{ system.name }}</h3>
+                <div class="water-level">💧 实时水位 {{ system.water_level }} 米</div>
+                <p class="intro">{{ system.culture_intro }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <!-- 空数据提示语温馨处理 -->
+    <div class="empty-state">
+        💧 水系数据正在从千年文脉中加载，我们的数字考察队正在路上……
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+</head>
+<body>
+    <h2>Flask-WTF登录页面</h2>
+
+    <form method="post">
+        {{ form.csrf_token }}
+        <p>
+            {{ form.username.label }}
+            {{ form.username }}
+        </p>
+        {% for error in form.username.errors %}
+        <p>{{ error }}</p>
+        {% endfor %}
+
+        <p>
+            {{ form.password.label }}
+            {{ form.password }}
+        </p>
+        {% for error in form.password.errors %}
+        <p>{{ error }}</p>
+        {% endfor %}
+
+        <p>{{ form.submit }}</p>
+    </form>
+
+    <p>{{ message }}</p>
+
+    <p><a href="/">返回首页</a></p>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>江西水文化数字展馆</title>
+    <link rel="stylesheet" href="/static/ai-chat.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0a1628, #1a3a4a 50%, #0d2835);
+            color: #fff; min-height: 100vh;
+        }
+        .header {
+            text-align: center; padding: 50px 20px 30px;
+        }
+        .header h1 {
+            font-size: 38px;
+            background: linear-gradient(135deg, #64b5f6, #26c6da);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .header p { font-size: 16px; color: #80cbc4; letter-spacing: 4px; }
+        .cards {
+            max-width: 1100px; margin: 0 auto; padding: 20px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 22px;
+        }
+        .card {
+            background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08);
+            border-radius: 14px; padding: 28px; text-align: center;
+            transition: all .3s; cursor: pointer;
+        }
+        .card:hover { background: rgba(255,255,255,.1); transform: translateY(-4px); }
+        .card .icon { font-size: 40px; margin-bottom: 12px; }
+        .card h3 { font-size: 18px; color: #64b5f6; margin-bottom: 8px; }
+        .card p { font-size: 13px; color: #90a4ae; line-height: 1.8; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🌊 江西水文化数字展馆</h1>
+        <p>虚实融通 · 智绘传承</p>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <div class="icon">🏞️</div>
+            <h3>鄱阳湖展区</h3>
+            <p>中国第一大淡水湖<br>千年水利文明</p>
+        </div>
+        <div class="card">
+            <div class="icon">🌊</div>
+            <h3>五大水系展区</h3>
+            <p>赣江 · 抚河 · 信江<br>饶河 · 修河</p>
+        </div>
+        <div class="card">
+            <div class="icon">👤</div>
+            <h3>治水名人堂</h3>
+            <p>王安石 · 文天祥<br>朱熹 · 陶渊明</p>
+        </div>
+        <div class="card">
+            <div class="icon">🏗️</div>
+            <h3>水利工程展区</h3>
+            <p>槎滩陂 · 福寿沟<br>万安水电站</p>
+        </div>
+        <div class="card">
+            <div class="icon">💧</div>
+            <h3>治水智慧展区</h3>
+            <p>古代排水系统<br>现代水利枢纽</p>
+        </div>
+        <div class="card">
+            <div class="icon">🎥</div>
+            <h3>数字人小潦</h3>
+            <p>AI智能导游<br>点击右下角体验</p>
+        </div>
+        <div class="card" onclick="showCompare()" style="border:2px dashed #64b5f6;">
+            <div class="icon">🔬</div>
+            <h3>Prompt对比演示</h3>
+            <p>点击查看<br>有Prompt vs 无Prompt</p>
+        </div>
+    </div>
+
+    <!-- AI聊天组件 -->
+    <div class="ai-chat-container" id="ai-chat">
+        <div class="ai-chat-header" onclick="document.getElementById('ai-chat').classList.toggle('ai-chat-collapsed')">
+            <span class="avatar">🌊</span>
+            <div>
+                <h3>小潦 · AI智能导游</h3>
+                <p>江西水文化展馆</p>
+            </div>
+        </div>
+        <div class="ai-chat-messages" id="ai-chat-messages"></div>
+        <div class="ai-chat-input-area">
+            <input id="ai-chat-input" placeholder="问我关于江西水利的任何问题...">
+            <button id="ai-chat-send">➤</button>
+        </div>
+    </div>
+
+    <!-- Prompt对比演示弹窗 -->
+    <div id="compare-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+    background:rgba(0,0,0,0.7); z-index:9999; justify-content:center; align-items:center;">
+        <div style="background:#fff; border-radius:16px; padding:30px; max-width:900px; width:90%; max-height:80vh; overflow-y:auto;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                <h2 style="margin:0; color:#155d7a;">🔬 Prompt效果对比演示</h2>
+                <button onclick="closeCompare()"
+                        style="background:none; border:none; font-size:24px; cursor:pointer; color:#999;">✕
+                </button>
+            </div>
+            <div style="margin-bottom:16px;">
+                <strong style="color:#333;">测试问题：</strong>
+                <span id="compare-question" style="color:#155d7a;"></span>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                <div style="background:#fff3f3; border-radius:12px; padding:16px; border:2px solid #ffcccc;">
+                    <h3 style="margin:0 0 8px; color:#c0392b;">❌ 无 Prompt</h3>
+                    <p style="font-size:11px; color:#999; margin:0 0 8px;">System Prompt: "你是一个AI助手"</p>
+                    <div id="compare-without" style="font-size:14px; color:#333; line-height:1.7; min-height:60px;">
+                        <em>加载中...</em>
+                    </div>
+                </div>
+                <div style="background:#f0f9f0; border-radius:12px; padding:16px; border:2px solid #ccffcc;">
+                    <h3 style="margin:0 0 8px; color:#27ae60;">✅ 有 Prompt</h3>
+                    <p style="font-size:11px; color:#999; margin:0 0 8px;">System Prompt: 角色设定+知识限定+输出格式</p>
+                    <div id="compare-with" style="font-size:14px; color:#333; line-height:1.7; min-height:60px;">
+                        <em>加载中...</em>
+                    </div>
+                </div>
+            </div>
+            <p style="margin-top:16px; font-size:13px; color:#666; text-align:center;">
+                💡 同样的模型，不同的 Prompt，回答质量天差地别
+            </p>
+        </div>
+    </div>
+
+    <script src="/static/ai-chat.js"></script>
+    <script>
+        // 预设的5个对比问题
+        const compareQuestions = [
+            "请介绍鄱阳湖"
+        ];
+
+        // 打开展示弹窗
+        async function showCompare() {
+            const modal = document.getElementById('compare-modal');
+            modal.style.display = 'flex';
+
+            // 随机选一个问题
+            const q = compareQuestions[Math.floor(Math.random() * compareQuestions.length)];
+            document.getElementById('compare-question').textContent = '“' + q + '”';
+
+            // 显示加载状态
+            document.getElementById('compare-without').innerHTML = '<em>⏳ AI思考中...</em>';
+            document.getElementById('compare-with').innerHTML = '<em>⏳ AI思考中...</em>';
+
+            try {
+                const resp = await fetch('/api/guide/compare', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({question: q})
+                });
+                const data = await resp.json();
+
+                document.getElementById('compare-without').textContent = data.without_prompt;
+                document.getElementById('compare-with').textContent = data.with_prompt;
+            } catch (e) {
+                document.getElementById('compare-without').textContent = '加载失败';
+                document.getElementById('compare-with').textContent = '加载失败';
+            }
+        }
+
+        function closeCompare() {
+            document.getElementById('compare-modal').style.display = 'none';
+        }
+
+        // 点击遮罩关闭
+        document.getElementById('compare-modal').addEventListener('click', function (e) {
+            if (e.target === this) closeCompare();
+        });
+    </script>
+</body>
+</html>
