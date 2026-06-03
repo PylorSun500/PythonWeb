@@ -1,13 +1,14 @@
+import os
 import pymysql
 import datetime
 
-# 数据库连接配置（集中管理）
+# 数据库连接配置 — 优先从环境变量读取（Docker 内自动注入），否则用本地兜底值
 DB_CONFIG = {
-    "host": "localhost",
-    "user": "root",
-    "passwd": "pylor520",
-    "db": "onlinedb",
-    "port": 3306,
+    "host": os.environ.get("MYSQL_HOST", "localhost"),
+    "user": os.environ.get("MYSQL_USER", "root"),
+    "passwd": os.environ.get("MYSQL_PASSWORD", "pylor520"),
+    "db": os.environ.get("MYSQL_DATABASE", "testdb"),
+    "port": int(os.environ.get("MYSQL_PORT", 3306)),
     "charset": "utf8",
 }
 
