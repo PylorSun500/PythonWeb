@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student</title>
+</head>
+<body>
+    <h2>学生信息</h2>
+
+    <table style="width:50%">
+        {# 添加一行标题展示字段：学生ID 学生姓名 学生年龄#}
+        <tr>
+            <th>学生ID</th>
+            <th>学生姓名</th>
+            <th>学生年龄</th>
+        </tr>
+    {% for b in pagination.items %}
+     <tr>
+         {# 补充完整，设置3列展示数据#}
+        <td>{{ b.id }}</td>
+        <td>{{ b.name }}</td>
+        <td>{{ b.age }}</td>
+      </tr>
+     {% endfor %}
+    </table>
+
+    总页数：{{ pagination.pages }}
+    <br>
+    查询数据总行数: {{ pagination.total }}
+    <br>
+    当前页码数: {{ pagination.page }}
+    <br>
+
+    <a href="/test?page=1">首页</a>
+    {% if pagination.has_prev %}
+        <a href="/test?page={{ pagination.prev_num }}">上一页</a>
+    {% endif %}
+    {% if pagination.has_next %}
+        <a href="/test?page={{ pagination.next_num }}">下一页</a>
+    {% endif %}
+    <a href="/test?page={{pagination.pages}}">尾页</a>
+    <br>
+
+    页码:
+    {% for i in pagination.iter_pages() %}
+    {% if i %}
+    <a href="/test?page={{ i }}">{{ i }}</a>
+    {% else %}
+    <span>…</span>
+    {% endif %}
+    {% endfor %}
+</body>
+</html>
